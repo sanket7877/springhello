@@ -15,6 +15,6 @@ public class SpringhelloApplication {
 
 	@GetMapping("/hello")
 	public String helo(){
-		return "hello";
+		return "helloj";
 	}
 }
