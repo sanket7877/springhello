@@ -15,7 +15,7 @@ public class SpringhelloApplication {
 	}
 
 	@RequestMapping("/")
-	public String helo(){
+	public String hello(){
 		return "helloj";
 	}
 }
