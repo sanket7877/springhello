@@ -12,6 +12,7 @@ public class SpringhelloApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringhelloApplication.class, args);
+		System.out.println("added");
 	}
 
 	@RequestMapping("/")
