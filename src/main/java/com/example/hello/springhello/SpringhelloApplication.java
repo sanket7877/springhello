@@ -18,7 +18,7 @@ public class SpringhelloApplication {
 	@RequestMapping("/")
 	public String hello(){
 		return "<h1>Welcome to the Application</h1>";
-	}
+	}sss
 	@Test
 	void contextLoads() {
 	}
