@@ -19,4 +19,7 @@ public class SpringhelloApplication {
 	public String hello(){
 		return "<h1>Welcome to the Application</h1>";
 	}
+	@Test
+	void contextLoads() {
+	}
 }
