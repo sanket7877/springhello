@@ -15,11 +15,10 @@ public class SpringhelloApplication {
 		System.out.println("addedd");
 	}
 
-	@RequestMapping("/")
+	@RequestMapping("/hello")
 	public String hello(){
+		System.out.println("Got here");
 		return "<h1>Welcome to the Application</h1>";
 	}
-	@Test
-	void contextLoads() {
-	}
-}dddd
+	
+}
