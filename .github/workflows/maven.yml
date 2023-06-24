@@ -1,0 +1,48 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+    - name: Deploy to Linux Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: 139.84.136.179   # Add the hostname or IP address of your Linux server as a secret in your GitHub repository settings
+        username: root   # Add the username for SSH authentication as a secret
+        key: gW=7@t,--xS)=o+Z  # Add the private SSH key as a secret
+
+        # Set the commands to execute on the server after deployment
+        script: |
+          sudo systemctl stop your-app-service  # Stop the running service if needed
+          rm -rf /opt/your-app/  # Remove the previous deployment
+          mkdir -p /opt/your-app/  # Create a new deployment directory
+          cp target/your-app.jar /opt/your-app/  # Copy the generated JAR file to the deployment directory
+          sudo systemctl start your-app-service  # Start the service
+    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+    - name: Update dependency graph
+      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
